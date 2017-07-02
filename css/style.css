@@ -1,0 +1,611 @@
+/* Utils classes */
+.pointer {
+    cursor: pointer;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/* Components */
+
+.search-picker-result {
+    position: relative;
+}
+
+.search-picker-search-list {
+    position: absolute;
+    border: 1px solid #B0B0B0;
+    padding: 5px;
+    box-shadow: 3px 3px 3px #B0B0B0;
+    border-radius: 5px;
+    background: #FAFAFA;
+    width: 100%;
+    z-index: 1001;
+}
+
+.search-picker-search-item {
+    padding: 5px 10px 5px 10px;
+    background: #F8F8F8;
+}
+
+.search-picker-search-item:hover {
+    background: #E8E8E8;
+}
+
+.search-picker-selected-list {
+    width: 100%;
+}
+
+.search-picker-selected-item {
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid #C0C0C0;
+    border-radius: 3px;
+    background: #F8F8F8;
+}
+
+.search-picker-selected-item > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ticket-dialog .ticket-left-side .ticket-price .price-selector input,
+.search-picker-input input {
+    width: calc(100% - 20px);
+    padding-right: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.ticket-dialog .ticket-left-side .ticket-price button,
+.search-picker-input button {
+    width: 26px;
+    margin-left: -8px;
+    margin-right: -15px;
+    padding-bottom: 9px;
+    padding-top: 21px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.dialog-wrapper {
+    top: 50%;
+    left: 50%;
+    height: 0px;
+    position: absolute;
+}
+
+.dialog {
+    position: relative;
+    top: -25vh;
+    left: -50%;
+    background: #FAFAFA;
+    border: 1px solid #B0B0B0;
+    margin: auto;
+    padding: 10px 20px 10px 20px;
+    box-shadow: 4px 4px 4px #B0B0B0;
+    border-radius: 8px;
+}
+
+.ngdialog-overlay {
+    opacity: 0.3;
+}
+
+.moment-picker {
+    z-index: 10001;
+}
+
+.dropdown-group {
+    display: inline-block;
+}
+
+.dropdown-group .dropdown-content {
+    margin-left: 5px;
+    background: #FAFAFA;
+    position: absolute;
+    padding: 10px;
+    box-shadow: 3px 3px 3px #B8B8B8;
+    border-radius: 5px;
+    z-index: -1;
+    transition-duration: 0.2s;
+    opacity: 0;
+}
+
+.dropdown-group:hover .dropdown-content {
+    z-index: 2000;
+    opacity: 1;
+    transition-duration: 0.2s;
+}
+
+.dropdown-content .button {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.top-panel {
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #FAFAFA;
+    box-shadow: 0px 1px 1px #D0D0D0;
+}
+
+.top-panel .dropdown-group .dropdown-button {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.side-panel {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transition: width 0.2s;
+    border-right: 1px solid #eee;
+    position: relative;
+}
+
+.side-panel:hover {
+    width: 120%;
+    transition: all 0.2s;
+}
+
+.side-panel-wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.side-panel-list {
+    padding: 5px;
+}
+
+.side-panel-list-row {
+    font-size: 120%;
+    padding: 5px;
+}
+
+.side-panel-list-item:hover {
+    background-color: #F6F6F6;
+}
+
+.side-panel-list-row input,
+.side-panel-list-row .side-panel-list-name {
+    width: calc(100% - 60px);
+    display: inline-block;
+}
+
+.side-panel-list-row .side-panel-list-icon {
+    float: right;
+    margin: 3px;
+    padding: 10px;
+    display: inline-block;
+}
+
+
+
+/* APP custom styling */
+
+.financies-panel,
+.financies-content {
+    vertical-align: top;
+    height: 100%;
+    display: inline-block;
+}
+
+.financies-panel,
+.budget-lists {
+    width: 200px;
+    margin-right: -3px;
+}
+
+.financies-content {
+    width: calc(100% - 201px);
+}
+
+.financies-settings {
+    position: absolute;
+    bottom: 0px;
+    width: calc(100%);
+    transition: width 0.2s;
+}
+
+.financies-panel .side-panel {
+    z-index: 1001;
+}
+
+.financies-settings-list {
+    width: 100%;
+}
+
+.financies-settings-content > div {
+    display: inline-block;
+    width: 100%;
+}
+
+.budget-lists,
+.list-tickets,
+.budget-detail {
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.budget-detail {
+    width: 100%;
+}
+
+.list-tickets {
+    width: calc(100% - 201px);
+    display: inline-block
+}
+
+.list-options {
+    padding-left: 10px;
+}
+
+.list-options-group,
+.list-options-group-title,
+.list-options-group-content {
+    display: inline-block;
+}
+
+.list-options-group-title {
+    font-size: 120%;
+    font-weight: 500;
+}
+
+.list-options-group:last-of-type {
+    float: right;
+    margin-right: 10px;
+}
+
+.list-options-group-content .icon {
+    display: inline-block;
+    width: 16px;
+}
+
+.list-options-group-content-row {
+    padding: 6px;
+    max-width: 200px;
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+.list-options-group-content-row:hover {
+    background: #F0F0F0;
+    border-radius: 4px;
+}
+
+.list-options-group-content-row > * {
+    display: inline-block;
+}
+
+.list-options-group-content-row .truncate {
+    width: calc(100% - 30px);
+}
+
+.list-options-group-content-selected {
+    background: #E0E0E0;
+}
+
+.ticket-dialog {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.ticket-dialog-edit {
+    width: 700px;
+}
+
+.ticket-left-side {
+    margin: 0;
+    display: inline-block;
+    width: calc(90% - 250px);
+    margin-right: 5%;
+    vertical-align: top;
+}
+
+.ticket-right-side {
+    display: inline-block;
+    width: 250px;
+    vertical-align: top;
+}
+
+.ticket-bottom {
+    display: block;
+    width: 100%;
+}
+
+.ticket-bottom textarea {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.ticket-dialog > .ticket-left-side > div {
+    min-height: 60px;
+}
+
+.ticket-dialog > .ticket-left-side > div > span:first-child {
+    display: inline-block;
+    vertical-align: top;
+    width: 80px;
+}
+
+.ticket-dialog > div > div > span:last-child {
+    display: inline-block;
+    margin-left: 5%;
+    width: calc(90% - 80px);
+}
+
+.ticket-buttons {
+    text-align: center;
+}
+
+.ticket-buttons button {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.budget-tickets {
+    height: 100%;
+}
+
+.budget-tickets > div {
+    vertical-align: top;
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+}
+
+.budget-tickets-list {
+    width: calc(100% - 75px);
+    overflow-y: auto;
+}
+
+.budget-tickets-side {
+    width: 70px;
+}
+
+.budget-tickets-button-calculate {
+    display: inline-block;
+}
+
+.budget-tickets-button-add {
+    display: inline-block;
+    position: relative;
+    top: calc(100% - 134px);
+}
+
+.budget-tickets-button-calculate button,
+.budget-tickets-button-add button {
+    width: 70px;
+    font-size: 40px;
+    margin: 0;
+}
+
+.budget-list-detail {
+    min-height: 100%;
+    height: 100%;
+}
+
+.budget-list-detail .list-tickets {
+    height: calc(70% - 40px);
+    width: 100%;
+    border-bottom: #000 inset 1px;
+}
+
+.budget-list-detail .list-notes {
+    height: 30%;
+    min-width: 100%;
+}
+
+.budget-list-detail .list-notes textarea {
+    min-width: 100%;
+    height: 100%;
+    margin: 0;
+    border: none;
+    resize: none;
+}
+
+.budget-list-detail .budget-detail {
+    height: 100%;
+}
+
+.budget-share .dropdown-content > input {
+    width: 100%;
+}
+
+.budget-share .dropdown-content table {
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.budget-share .dropdown-content td:first-child {
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.budget-share .dropdown-content td:last-child {
+    padding: 5px;
+    width: 30px;
+}
+
+/*.budget-detail .budget-grid .dndPlaceholder {
+    vertical-align: top;
+    margin: 3px;
+    padding: 2px;
+    border: 1px solid #B8B8B8;
+    border-radius: 7px;
+    display: inline-block;
+    width: 120px;
+    height: 90px;
+}
+
+.budget-detail .budget-grid .dndPlaceholder {
+    background-color: #D0D0D0;
+}
+
+.budget-detail .budget-grid .dndDraggingSource {
+    opacity: 0.2;
+}*/
+
+.list-ticket-set-wrapper,
+.list-ticket-set-content {
+    display: table;
+    width: 100%;
+}
+
+.list-ticket-set,
+.list-ticket-set-content > .list-ticket-set {
+    display: table-cell;
+    padding: 5px;
+}
+
+.list-ticket-set-name {
+    border-bottom: 2px solid #E8E8E8;
+}
+
+.list-ticket-item {
+    display: inline-block;
+    width: 180px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px 8px 5px 8px;
+    height: 170px;
+    float: left;
+}
+
+.list-ticket-selector-overlay {
+    position: relative;
+    margin-left: -7px;
+    margin-top: -4px;
+    width: 176px;
+    height: 166px;
+    background: #A0A0A0;
+    opacity: 0.5;
+    font-size: 50px;
+    color: #FFFFFF;
+    padding-top: calc(50% - 15px);
+    text-align: center;
+    margin-bottom: -162px;
+    z-index: 2000;
+    transition-duration: 0.2s;
+    border-radius: 5px;
+}
+
+.list-ticket-item .list-ticket-delete {
+    position: relative;
+    right: calc(40px - 100%);
+    display: inline-block;
+    top: 140px;
+}
+
+.list-ticket-selector-overlay:hover {
+    background: #C0C0C0;
+    font-size: 60px;
+    transition-duration: 0.2s;
+}
+
+.list-ticket-notes {
+    width: calc(100% - 30px);
+}
+
+.list-ticket-item-options {
+    margin-bottom: -20px;
+}
+
+.list-ticket-item .icon {
+    display: inline-block;
+}
+
+.list-ticket-item .list-ticket-edit {
+    position: relative;
+    right: calc(20px - 100%);
+    display: inline-block;
+}
+
+.list-ticket-item .list-ticket-date,
+.list-ticket-item .list-ticket-price {
+    font-size: 120%;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.list-ticket-line {
+    height: 26px;
+}
+
+.list-ticket-icons,
+.list-ticket-text {
+    display: inline-block;
+}
+
+.list-ticket-icons {
+    width: 35px;
+}
+
+.list-ticket-text {
+    width: calc(100% - 40px);
+}
+
+.ticket-calculate td {
+    padding: 5px 15px 5px 15px;
+}
+
+.ticket-calculate-head th {
+    border-bottom: 1px solid #B0B0B0;
+    font-size: 120%;
+    text-align: center;
+}
+
+.ticket-calculate-row:hover {
+    background-color: #F0F0F0;
+}
+
+.ticket-calculate-row .ticket-calculate-date {
+    display: inline-block;
+    width: 100px;
+}
+
+.ticket-calculate-row .ticket-calculate-price {
+    display: inline-block;
+}
+
+.ticket-calculate-row td {
+    border-right: 1px solid #B0B0B0;
+}
+
+.ticket-calculate-row td:last-child {
+    border-right: none;
+}
+
+.ticket-calculate-item span {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ticket-calculate-plus {
+    color: #00CC00;
+}
+
+.ticket-calculate-minus {
+    color: #CC0000;
+}
+
+.ticket-calculate-sum td {
+    border-top: 1px solid #B0B0B0;
+    font-size: 120%;
+    text-align: center;
+}

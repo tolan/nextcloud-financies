@@ -1,0 +1,63 @@
+<div ng-controller="ListOptionsController" class="list-options">
+    <div class="list-options-group">
+        <div class="list-options-group-title">Zobrazení:</div>
+        <div class="list-options-group-content">
+            <div class="dropdown-group">
+                <div class="dropdown-button">Seřazení</div>
+                <div class="dropdown-content">
+                    <div class="pointer list-options-group-content-row"
+                         ng-class="isSelected('sorting', item) ? 'list-options-group-content-selected' : ''"
+                         ng-repeat="item in sortingOptions"
+                         ng-click="select('sorting', item)"
+                    >
+                        <span class="pointer icon {{item.icon}}"></span>
+                        <span class="pointer truncate">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown-group">
+                <div class="dropdown-button">Seskupení</div>
+                <div class="dropdown-content">
+                    <div class="pointer list-options-group-content-row" ng-repeat="item in groupingOptions" ng-click="select('grouping', item)">
+                        <span class="pointer icon" ng-class="isSelected('grouping', item) ? 'icon-checkmark' : 'icon-close'"></span>
+                        <span class="pointer truncate">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-options-group">
+        <div class="list-options-group-title">Filtry:</div>
+        <div class="list-options-group-content">
+            <div class="dropdown-group">
+                <div class="dropdown-button">Skupina</div>
+                <div class="dropdown-content">
+                    <div class="pointer list-options-group-content-row" ng-repeat="item in groups" ng-click="select('groups', item)">
+                        <span class="pointer icon" ng-class="isSelected('groups', item) ? 'icon-checkmark' : 'icon-close'"></span>
+                        <span class="pointer truncate">{{item.name}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown-group">
+                <div class="dropdown-button">Plátce</div>
+                <div class="dropdown-content">
+                    <div class="pointer list-options-group-content-row" ng-repeat="item in payers" ng-click="select('payers', item)">
+                        <span class="pointer icon" ng-class="isSelected('payers', item) ? 'icon-checkmark' : 'icon-close'"></span>
+                        <span class="pointer truncate">{{item.userId}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown-group">
+                <div class="dropdown-button">Spotřebitel</div>
+                <div class="dropdown-content">
+                    <div class="pointer list-options-group-content-row" ng-repeat="item in consumers" ng-click="select('consumers', item)">
+                        <span class="pointer icon" ng-class="isSelected('consumers', item) ? 'icon-checkmark' : 'icon-close'"></span>
+                        <span class="pointer truncate">{{item.userId}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

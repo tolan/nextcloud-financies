@@ -1,0 +1,48 @@
+<div class="dialog-wrapper">
+    <div class="dialog ticket-dialog ticket-dialog-edit">
+        <div class="ticket-left-side">
+            <div class="ticket-price">
+                <span>Částka</span>
+                <span class="price-selector">
+                    <input ng-model="ticket.price" type="text" />
+                    <button class="button icon-menu" ng-click="selectTicket()"></button>
+                </span>
+            </div>
+            <div class="ticket-groups">
+                <span>Skupiny</span>
+                <span><picker ng-model="ticket.groups" api="groupsPickerApi" template="groupsPickerItemTemplate" parent="this"></picker></span>
+            </div>
+            <div class="ticket-payers">
+                <span>Plátci</span>
+                <span><picker ng-model="ticket.payers" api="sharesPickerApi" template="sharesPickerItemTemplate" parent="this" select-all="--- Vybrat vše ---"></picker></span>
+            </div>
+            <div class="ticket-consumers">
+                <span>Spotřebitelé</span>
+                <span><picker ng-model="ticket.consumers" api="sharesPickerApi" template="sharesPickerItemTemplate" parent="this" select-all="--- Vybrat vše ---"></picker></span>
+            </div>
+        </div>
+
+        <div class="ticket-right-side">
+            <div class="ticket-date"
+                moment-picker="ticket.date"
+                locale="cs"
+                format="D.M.YYYY"
+                max-view="day"
+                start-view="day"
+                today="true"
+                inline="true">
+            </div>
+        </div>
+
+        <div class="ticket-bottom">
+            <div class="ticket-notes">
+                <textarea ng-model="ticket.notes"></textarea>
+            </div>
+        </div>
+
+        <div class="ticket-buttons">
+            <button ng-click="save()">Uložit</button>
+            <button ng-click="close()">Zavřít</button>
+        </div>
+    </div>
+</div>

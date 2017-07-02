@@ -1,0 +1,29 @@
+<div class="search-picker">
+    <div class="search-picker-input">
+        <input type="text" ng-change="search()" ng-model="string" />
+        <button class="icon-caret-dark" ng-click="searchAll()"></button>
+    </div>
+    <div class="search-picker-result">
+        <div class="search-picker-search-list" ng-show="searched.length" ng-mouseleave="leaveSearched()" ng-mouseenter="enterSearched()">
+            <div class="search-picker-search-item" ng-show="selectAll" ng-click="selectAllItems(searched)">
+                <div class="search-picker-search-item-selectAllr" >
+                    <div>{{selectAll}}</div>
+                </div>
+            </div>
+
+            <div class="search-picker-search-item" ng-repeat="item in searched | limitTo:20" ng-click="select(item)">
+                <div class="search-picker-search-item-wrapper" ng-init="item">
+                    <div ng-init="transformSearchedItem(item, $index, '.search-picker-search-item-wrapper')"></div>
+                </div>
+            </div>
+        </div>
+        <div class="search-picker-selected-list" ng-show="selected.length">
+            <div class="search-picker-selected-item" ng-repeat="item in selected">
+                <div class="search-picker-selected-item-wrapper" ng-init="item">
+                    <div ng-init="transformSearchedItem(item, $index, '.search-picker-selected-item-wrapper')"></div>
+                </div>
+                <div class="icon-close" ng-click="unselect(item)"></div>
+            </div>
+        </div>
+    </div>
+</div>

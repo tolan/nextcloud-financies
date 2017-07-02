@@ -1,0 +1,22 @@
+<div class="side-panel-list">
+    <div class="side-panel-list-row side-panel-list-item" ng-repeat="group in groups" ng-include="'group_edit.html'"></div>
+    <div class="side-panel-list-row side-panel-list-add" ng-include="'group_edit.html'"></div>
+</div>
+
+<script type="text/ng-template" id="group_edit.html">
+    <span ng-if="group._action === 'edit'">
+        <input type="text" name="name" ng-model="group.name"auto-focus>
+        <div class="pointer side-panel-list-icon icon-checkmark" ng-click="save(group)"></div>
+        <div class="pointer side-panel-list-icon icon-close" ng-click="close(group)"></div>
+    </span>
+    <span ng-if="group._action === 'delete'">
+        <span class="side-panel-list-name truncate">{{group.name}}</span>
+        <div class="pointer side-panel-list-icon icon-checkmark" ng-click="delete(group)"></div>
+        <div class="pointer side-panel-list-icon icon-close" ng-click="close(group)"></div>
+    </span>
+    <span ng-if="!group._action">
+        <span class="side-panel-list-name truncate">{{group.name}}</span>
+        <div ng-if="group.id" class="pointer side-panel-list-icon icon-delete" ng-click="openDelete(group)"></div>
+        <div class="pointer side-panel-list-icon" ng-class="group.id ? 'icon-rename' : 'icon-add'" ng-click="openEdit(group)"></div>
+    </span>
+</script>

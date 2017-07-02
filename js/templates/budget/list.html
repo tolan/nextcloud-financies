@@ -1,0 +1,29 @@
+<div class="side-panel-list" dnd-list="budgets">
+    <div class="side-panel-list-row side-panel-list-item"
+        ng-repeat="budget in budgets"
+        ng-include="'budget_edit.html'"
+        dnd-draggable="budget"
+        dnd-moved="budgets.splice($index, 1); movedBudgets()"
+        dnd-effect-allowed="move"
+        >
+    </div>
+    <div class="side-panel-list-row side-panel-list-add" ng-include="'budget_edit.html'"></div>
+</div>
+
+<script type="text/ng-template" id="budget_edit.html">
+    <span ng-if="budget._action === 'edit'">
+        <input type="text" name="name" ng-model="budget.name" auto-focus>
+        <div class="pointer side-panel-list-icon icon-checkmark" ng-click="save(budget)"></div>
+        <div class="pointer side-panel-list-icon icon-close" ng-click="close(budget)"></div>
+    </span>
+    <span ng-if="budget._action === 'delete'">
+        <a class="side-panel-list-name truncate" href="#/budget/{{budget.id}}">{{budget.name}}</a>
+        <div class="pointer side-panel-list-icon icon-checkmark" ng-click="delete(budget)"></div>
+        <div class="pointer side-panel-list-icon icon-close" ng-click="close(budget)"></div>
+    </span>
+    <span ng-if="!budget._action">
+        <a class="side-panel-list-name truncate" href="#/budget/{{budget.id}}">{{budget.name}}</a>
+        <div ng-if="budget.id" class="pointer side-panel-list-icon icon-delete" ng-click="openDelete(budget)"></div>
+        <div class="pointer side-panel-list-icon" ng-class="budget.id ? 'icon-rename' : 'icon-add'" ng-click="openEdit(budget)"></div>
+    </span>
+</script>

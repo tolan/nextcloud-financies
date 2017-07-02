@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<info>
+    <id>financies</id>
+    <name>Financies</name>
+    <summary>Application for home financies</summary>
+    <description><![CDATA[Application for home financies.]]></description>
+    <licence>agpl</licence>
+    <author mail="tolan2@seznam.cz" >Martin Kovář</author>
+    <version>0.0.8</version>
+    <namespace>Financies</namespace>
+    <category>office</category>
+    <bugs>http://zom.pilsfree.cz</bugs>
+    <dependencies>
+        <owncloud min-version="9.2"/>
+        <nextcloud min-version="11" max-version="11"/>
+    </dependencies>
+</info>

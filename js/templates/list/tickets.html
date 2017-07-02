@@ -1,0 +1,75 @@
+<div ng-controller="ListTicketsController" class="budget-tickets">
+    <div class="budget-tickets-list" ng-click="selectTicketForPrice()">
+        <div class="list-ticket-set-wrapper">
+            <div ng-repeat="item in grouped" ng-include="'ticket-group.html'" class="list-ticket-set">
+            </div>
+        </div>
+    </div>
+    <div class="budget-tickets-side">
+        <div class="budget-tickets-button-calculate">
+            <button ng-hide="priceSelector.active" class="button pointer" ng-click="openCalculateDialog()">Σ</button>
+        </div>
+
+        <div class="budget-tickets-button-add">
+            <button ng-hide="priceSelector.active" class="button pointer" ng-click="openDialog({})">+</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ticket-group.html">
+    <div ng-if="item.id" ng-include="'ticket.html'" class="list-ticket-item"></div>
+    <div ng-if="!item.id && item.tickets.length > 0">
+        <div class="list-ticket-set-name" ng-if="item.name">{{item.name}}</div>
+        <div class="list-ticket-set-content">
+            <div ng-repeat="item in item.tickets | customFilter:filter | orderBy:options['sorting'][0]['field']:options['sorting'][0]['type']==='asc':order"
+                ng-class="item.id ? 'list-ticket-set-last' : 'list-ticket-set'">
+                <div ng-include="'ticket-group.html'"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="ticket.html">
+    <div ng-show="priceSelector.active && item.id !== priceSelector.ticket.id" class="list-ticket-selector-overlay pointer" ng-click="selectTicketForPrice(item)">
+        <span class="pointer">{{item.id}}</span>
+    </div>
+    <div class="list-ticket-item-options">
+        <div class="list-ticket-edit" ng-click="openDialog(item)">
+            <div class="pointer icon icon-more"></div>
+        </div>
+        <div class="list-ticket-delete" ng-click="openDelete(item)">
+            <div class="pointer icon icon-delete pointer"></div>
+        </div>
+    </div>
+    <div class="list-ticket-item-content">
+        <div class="list-ticket-date">{{item.date}}</div>
+        <div class="list-ticket-price" title="{{item.price}}">{{getPrice(item.price)}}</div>
+        <div class="list-ticket-line list-ticket-groups" title="{{'Skupiny: '+getNames(item.groups, 'name')}}">
+            <div class="list-ticket-icons">
+                <div class="icon icon-public"></div>
+            </div>
+            <div class="list-ticket-text truncate">
+                {{getNames(item.groups, 'name')}}
+            </div>
+        </div>
+        <div class="list-ticket-line list-ticket-payers" title="{{'Plátci: '+getNames(item.payers, 'userId')}}">
+            <div class="list-ticket-icons">
+                <div class="icon icon-user"></div><div class="icon icon-triangle-n"></div>
+            </div>
+            <div class="list-ticket-text truncate">
+                {{getNames(item.payers, 'userId')}}
+            </div>
+        </div>
+        <div class="list-ticket-line list-ticket-consumers" title="{{'Spotřebitelé: '+getNames(item.consumers, 'userId')}}">
+            <div class="list-ticket-icons">
+                <div class="icon icon-user"></div><div class="icon icon-triangle-s"></div>
+            </div>
+            <div class="list-ticket-text truncate">
+                {{getNames(item.consumers, 'userId')}}
+            </div>
+        </div>
+        <div class="truncate list-ticket-line list-ticket-notes" title="{{item.notes}}">
+            {{item.notes}}
+        </div>
+    </div>
+</script>
