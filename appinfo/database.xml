@@ -4,7 +4,7 @@
     <overwrite>false</overwrite>
     <charset>utf8</charset>
     <table>
-        <name>*dbprefix*ownfinancies_budgets</name>
+        <name>*dbprefix*financies_budgets</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -40,7 +40,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*ownfinancies_budgets_shares</name>
+        <name>*dbprefix*financies_shares</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -76,7 +76,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*ownfinancies_budgets_lists</name>
+        <name>*dbprefix*financies_lists</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -119,7 +119,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*ownfinancies_budgets_groups</name>
+        <name>*dbprefix*financies_groups</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -141,7 +141,7 @@
     </table>
 
     <table>
-        <name>*dbprefix*ownfinancies_budgets_tickets</name>
+        <name>*dbprefix*financies_tickets</name>
         <declaration>
             <field>
                 <name>id</name>
@@ -198,7 +198,7 @@
     </table>
 
         <table>
-        <name>*dbprefix*ownfinancies_budgets_notes</name>
+        <name>*dbprefix*financies_notes</name>
         <declaration>
             <field>
                 <name>id</name>
