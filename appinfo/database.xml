@@ -161,7 +161,7 @@
             </field>
             <field>
                 <name>date</name>
-                <type>date</type>
+                <type>string</type>
                 <notnull>false</notnull>
             </field>
             <field>

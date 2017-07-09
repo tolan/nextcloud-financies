@@ -6,7 +6,7 @@
     <description><![CDATA[Application for home financies.]]></description>
     <licence>agpl</licence>
     <author mail="tolan2@seznam.cz" >Martin Kovář</author>
-    <version>0.0.9</version>
+    <version>0.0.10</version>
     <namespace>Financies</namespace>
     <category>office</category>
     <bugs>http://zom.pilsfree.cz</bugs>
