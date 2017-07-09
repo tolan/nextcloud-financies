@@ -4,8 +4,8 @@
 
 /* App Module */
 var appModule   = angular.module('Financies', ['ngRoute', 'dndLists', 'ngDialog', 'moment-picker']);
-var baseUrl     = OC.appswebroots.financies;
-var templateUrl = baseUrl + '/js/templates/';
+var baseUrl     = '/apps/financies';
+var templateUrl = OC.appswebroots.financies + '/js/templates/';
 
 appModule
 .service('AbstractService', function($rootScope) {

@@ -2,7 +2,7 @@
 
 namespace OCA\Financies\Db;
 
-use OCP\IDb;
+use OCP\IDbConnection;
 use OCP\AppFramework\Db\Mapper;
 
 /**
@@ -12,8 +12,8 @@ use OCP\AppFramework\Db\Mapper;
  */
 class GroupMapper extends Mapper {
 
-    public function __construct(IDb $db) {
-        parent::__construct($db, 'ownfinancies_budgets_groups', Group::class);
+    public function __construct(IDbConnection $db) {
+        parent::__construct($db, 'financies_groups', Group::class);
     }
 
     public function find() {

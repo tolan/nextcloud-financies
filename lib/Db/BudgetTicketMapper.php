@@ -2,7 +2,7 @@
 
 namespace OCA\Financies\Db;
 
-use OCP\IDb;
+use OCP\IDbConnection;
 use OCP\AppFramework\Db\Mapper;
 
 /**
@@ -14,9 +14,9 @@ class BudgetTicketMapper extends Mapper {
 
     private $_listMapper;
 
-    public function __construct(IDb $db) {
+    public function __construct(IDbConnection $db) {
         $this->_listMapper = new BudgetListMapper($db);
-        parent::__construct($db, 'ownfinancies_budgets_tickets', BudgetTicket::class);
+        parent::__construct($db, 'financies_tickets', BudgetTicket::class);
     }
 
     public function find($listId, $userId) {

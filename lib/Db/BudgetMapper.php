@@ -2,7 +2,7 @@
 
 namespace OCA\Financies\Db;
 
-use OCP\IDb;
+use OCP\IDbConnection;
 use OCP\AppFramework\Db\Mapper;
 
 /**
@@ -12,10 +12,10 @@ use OCP\AppFramework\Db\Mapper;
  */
 class BudgetMapper extends Mapper {
 
-    private $_shareTable = '*PREFIX*ownfinancies_budgets_shares';
+    private $_shareTable = '*PREFIX*financies_shares';
 
-    public function __construct(IDb $db) {
-        parent::__construct($db, 'ownfinancies_budgets', Budget::class);
+    public function __construct(IDbConnection $db) {
+        parent::__construct($db, 'financies_budgets', Budget::class);
     }
 
     public function find($userId) {
