@@ -8,7 +8,7 @@ angular.module('Financies')
 	$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
 
         $routeProvider
-            .when('/', {})
+            .when('/', {templateUrl: templateUrl + 'budget/detail.html', controller: 'BudgetController'})
             .when('/budget/:budgetId', {templateUrl: templateUrl + 'budget/detail.html', controller: 'BudgetController'})
             .when('/budget/:budgetId/list/:listId', {templateUrl: templateUrl + 'budget/detail.html', controller: 'BudgetController'})
 

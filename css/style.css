@@ -1,193 +1,7 @@
-/* Utils classes */
-.pointer {
-    cursor: pointer;
-}
-
-.truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-
-/* Components */
-
-.search-picker-result {
-    position: relative;
-}
-
-.search-picker-search-list {
-    position: absolute;
-    border: 1px solid #B0B0B0;
-    padding: 5px;
-    box-shadow: 3px 3px 3px #B0B0B0;
-    border-radius: 5px;
-    background: #FAFAFA;
-    width: 100%;
-    z-index: 1001;
-}
-
-.search-picker-search-item {
-    padding: 5px 10px 5px 10px;
-    background: #F8F8F8;
-}
-
-.search-picker-search-item:hover {
-    background: #E8E8E8;
-}
-
-.search-picker-selected-list {
-    width: 100%;
-}
-
-.search-picker-selected-item {
-    display: inline-block;
-    padding: 3px 10px 3px 10px;
-    border: 1px solid #C0C0C0;
-    border-radius: 3px;
-    background: #F8F8F8;
-}
-
-.search-picker-selected-item > div {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.ticket-dialog .ticket-left-side .ticket-price .price-selector input,
-.search-picker-input input {
-    width: calc(100% - 20px);
-    padding-right: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-
-.ticket-dialog .ticket-left-side .ticket-price button,
-.search-picker-input button {
-    width: 26px;
-    margin-left: -8px;
-    margin-right: -15px;
-    padding-bottom: 11px;
-    padding-top: 21px;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
-}
-
-.dialog-wrapper {
-    top: 50%;
-    left: 50%;
-    height: 0px;
-    position: absolute;
-}
-
-.dialog {
-    position: relative;
-    top: -25vh;
-    left: -50%;
-    background: #FAFAFA;
-    border: 1px solid #B0B0B0;
-    margin: auto;
-    padding: 10px 20px 10px 20px;
-    box-shadow: 4px 4px 4px #B0B0B0;
-    border-radius: 8px;
-}
-
-.ngdialog-overlay {
-    opacity: 0.3;
-}
-
-.moment-picker {
-    z-index: 10001;
-}
-
-.dropdown-group {
-    display: inline-block;
-}
-
-.dropdown-group .dropdown-content {
-    margin-left: 5px;
-    background: #FAFAFA;
-    position: absolute;
-    padding: 10px;
-    box-shadow: 3px 3px 3px #B8B8B8;
-    border-radius: 5px;
-    z-index: -1;
-    transition-duration: 0.2s;
-    opacity: 0;
-}
-
-.dropdown-group:hover .dropdown-content {
-    z-index: 2000;
-    opacity: 1;
-    transition-duration: 0.2s;
-}
-
-.dropdown-content .button {
-    display: inline-block;
-    width: 100%;
-    white-space: nowrap;
-}
-
-.top-panel {
-    padding-left: 5px;
-    padding-right: 5px;
-    background: #FAFAFA;
-    box-shadow: 0px 1px 1px #D0D0D0;
-}
-
-.top-panel .dropdown-group .dropdown-button {
-    padding: 8px;
-    cursor: pointer;
-}
-
-.side-panel {
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    transition: width 0.2s;
-    border-right: 1px solid #eee;
-    position: relative;
-}
-
-.side-panel:hover {
-    width: 120%;
-    transition: all 0.2s;
-}
-
-.side-panel-wrapper {
-    height: 100%;
-    width: 100%;
-}
-
-.side-panel-list {
-    padding: 5px;
-}
-
-.side-panel-list-row {
-    font-size: 120%;
-    padding: 5px;
-}
-
-.side-panel-list-item:hover {
-    background-color: #F6F6F6;
-}
-
-.side-panel-list-row input,
-.side-panel-list-row .side-panel-list-name {
-    width: calc(100% - 60px);
-    display: inline-block;
-}
-
-.side-panel-list-row .side-panel-list-icon {
-    float: right;
-    margin: 3px;
-    padding: 10px;
-    display: inline-block;
-}
-
-
-
 /* APP custom styling */
+.financies-content {
+    width: 100%;
+}
 
 .financies-panel,
 .financies-content {
@@ -200,10 +14,6 @@
 .budget-lists {
     width: 200px;
     margin-right: -3px;
-}
-
-.financies-content {
-    width: calc(100% - 201px);
 }
 
 .financies-settings {
@@ -227,20 +37,16 @@
 }
 
 .budget-lists,
-.list-tickets,
-.budget-detail {
+.list-tickets {
     height: 100%;
     display: inline-block;
     vertical-align: top;
 }
 
-.budget-detail {
-    width: 100%;
-}
-
 .list-tickets {
-    width: calc(100% - 201px);
-    display: inline-block
+    width: calc(100% - 401px);
+    min-width: 320px;
+    display: inline-block;
 }
 
 .list-options {
@@ -301,39 +107,59 @@
     width: 700px;
 }
 
-.ticket-left-side {
-    margin: 0;
-    display: inline-block;
-    width: calc(90% - 250px);
-    margin-right: 5%;
-    vertical-align: top;
-}
-
-.ticket-right-side {
+.ticket-section-date {
+    margin-left: 10px;
     display: inline-block;
     width: 250px;
     vertical-align: top;
 }
 
-.ticket-bottom {
-    display: block;
-    width: 100%;
+.ticket-section-inputs {
+    margin: 0;
+    display: inline-block;
+    width: calc(100% - 275px);
+    margin-left: 10px;
+    vertical-align: top;
 }
 
-.ticket-bottom textarea {
+.ticket-section-notes {
+    display: block;
+    width: 100%;
+    height: 60px;
+}
+
+.ticket-section-notes textarea {
     width: 100%;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
-.ticket-dialog > .ticket-left-side > div {
+.ticket-dialog > .ticket-section-inputs > div {
     min-height: 60px;
 }
 
-.ticket-dialog > .ticket-left-side > div > span:first-child {
+.ticket-dialog > .ticket-section-inputs > div > span:first-child {
     display: inline-block;
     vertical-align: top;
     width: 80px;
+}
+
+.ticket-dialog .ticket-section-inputs .ticket-price .price-selector input {
+    width: calc(100% - 20px);
+    padding-right: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.ticket-dialog .ticket-section-inputs .ticket-price button {
+    width: 26px;
+    margin-left: -8px;
+    margin-right: -15px;
+    padding-bottom: 11px;
+    padding-top: 21px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
 }
 
 .ticket-dialog > div > div > span:last-child {
@@ -342,11 +168,13 @@
     width: calc(90% - 80px);
 }
 
-.ticket-buttons {
+.ticket-section-buttons {
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.ticket-buttons button {
+.ticket-section-buttons button {
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -395,13 +223,13 @@
 }
 
 .budget-list-detail .list-tickets {
-    height: calc(75% - 40px);
+    height: calc(80% - 40px);
     width: 100%;
     border-bottom: #000 inset 1px;
 }
 
 .budget-list-detail .list-notes {
-    height: 25%;
+    height: 20%;
     min-width: 100%;
 }
 
@@ -559,6 +387,7 @@
 }
 
 .ticket-calculate td {
+    width: 180px;
     padding: 5px 15px 5px 15px;
 }
 

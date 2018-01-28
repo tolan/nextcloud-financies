@@ -57,7 +57,7 @@
                 <div class="icon icon-user"></div><div class="icon icon-triangle-n"></div>
             </div>
             <div class="list-ticket-text truncate">
-                {{getNames(item.payers, 'userId')}}
+                {{getNames(item.payers, ['displayname', 'userId'])}}
             </div>
         </div>
         <div class="list-ticket-line list-ticket-consumers" title="{{'Spotřebitelé: '+getNames(item.consumers, 'userId')}}">
@@ -65,7 +65,7 @@
                 <div class="icon icon-user"></div><div class="icon icon-triangle-s"></div>
             </div>
             <div class="list-ticket-text truncate">
-                {{getNames(item.consumers, 'userId')}}
+                {{getNames(item.consumers, ['displayname', 'userId'])}}
             </div>
         </div>
         <div class="truncate list-ticket-line list-ticket-notes" title="{{item.notes}}">

@@ -15,7 +15,6 @@ angular.module('Financies')
         templateUrl: templateUrl + 'directives/picker.html',
         link: function(scope, element) {
             var searchDelay,
-                searchShowTimer,
                 clone = function (item) {
                     var clone = _.clone(item);
                     if (clone.$$hashKey) {
@@ -24,22 +23,10 @@ angular.module('Financies')
 
                     return clone;
                 },
-                initShowSearch = function () {
-                    scope.enterSearched();
-                    searchShowTimer = $timeout(
-                        function() {
-                            scope.leaveSearched();
-                        },
-                        5000
-                    );
-                },
                 processSearch = function () {
                     scope.api(scope.string, function(response) {
-                        var cloned = response.map(function(item) {
-                            return clone(item);
-                        });
-                        scope.searched = _.difference(cloned, scope.selected);
-                        initShowSearch();
+                        scope.searched = response;
+                        scope.enterSearched();
                     });
                 };
 
@@ -48,28 +35,31 @@ angular.module('Financies')
             scope.searched = [];
             scope.isOpenSearch = false;
 
+            scope.isSelected = function (item) {
+                return _.find(scope.selected, clone(item));
+            }
+
             scope.selectAllItems = function(searched) {
                 searched.forEach(function(item) {
-                    scope.selected.push(item);
+                    if (!scope.isSelected(item)) {
+                        scope.selected.push(clone(item));
+                    }
                 });
 
                 scope.searched = [];
                 scope.leaveSearched();
             };
 
-            scope.select = function(item) {
-                if (!_.find(scope.selected, clone(item))) {
-                    scope.selected.push(item);
+            scope.select = function (item, showSeach) {
+                var index = scope.isSelected(item);
+                if (!index) {
+                    scope.selected.push(clone(item));
+                } else {
+                    scope.selected.splice(index, 1);
                 }
 
-                scope.searched = _.without(scope.searched, item);
-                initShowSearch();
-            };
-
-            scope.unselect = function(item) {
-                var index = _.indexOf(scope.selected, item);
-                if (index !== -1) {
-                    scope.selected.splice(index, 1);
+                if (showSeach) {
+                    scope.enterSearched();
                 }
             };
 
@@ -80,9 +70,6 @@ angular.module('Financies')
 
             scope.enterSearched = function() {
                 scope.isOpenSearch = true;
-                if (searchShowTimer) {
-                    $timeout.cancel(searchShowTimer);
-                }
             };
 
             scope.searchAll = function () {

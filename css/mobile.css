@@ -1,0 +1,136 @@
+@media only screen and (max-width: 750px) {
+    .financies-panel,
+    .budget-lists {
+        width: 50%;
+        margin-right: -3px;
+    }
+
+    .list-tickets {
+        width: 100%;
+    }
+
+    .ticket-dialog-edit {
+        width: 90vw;
+    }
+
+    .ticket-section-inputs,
+    .ticket-section-notes,
+    .ticket-section-buttons {
+        width: 90%;
+    }
+    .ticket-section-date {
+        width: 80%;
+        padding-left: 10%;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .dialog {
+        max-height: 90vh;
+        top: -45vh;
+    }
+
+    .dialog-content {
+        max-height: 85vh;
+        height: 100%;
+    }
+
+    .side-panel {
+        height: 100%;
+    }
+
+    .financies-panel,
+    .budget-lists {
+        width: 100%;
+        margin-right: -3px;
+        height: 100%;
+        max-height: 200px;
+        border-bottom: 1px solid #B0B0B0;
+    }
+
+    .financies-settings,
+    .budget-share,
+    .budget-list-detail > .top-panel {
+        display: none;
+    }
+
+    .ticket-calculate td {
+        width: 120px;
+        padding: 0;
+    }
+
+    .ticket-calculate-row .ticket-calculate-date {
+        width: 50px;
+    }
+
+    .list-ticket-item {
+        font-size: 90%;
+        display: inline-block;
+        width: 120px;
+        border: 1px solid #C0C0C0;
+        border-radius: 3px;
+        margin: 4px;
+        padding: 2px 3px 2px 3px;
+        height: 120px;
+        float: left;
+    }
+
+    .list-ticket-selector-overlay {
+        position: relative;
+        margin-left: -2px;
+        margin-top: -1px;
+        width: 116px;
+        height: 116px;
+        background: #A0A0A0;
+        opacity: 0.5;
+        font-size: 40px;
+        color: #FFFFFF;
+        padding-top: calc(50% - 10px);
+        text-align: center;
+        margin-bottom: -112px;
+        z-index: 2000;
+        transition-duration: 0.2s;
+        border-radius: 3px;
+    }
+
+    .list-ticket-item .list-ticket-delete {
+        position: relative;
+        right: calc(35px - 100%);
+        display: inline-block;
+        top: 98px;
+    }
+
+    .list-ticket-selector-overlay:hover {
+        background: #C0C0C0;
+        font-size: 50px;
+        transition-duration: 0.2s;
+    }
+
+    .list-ticket-notes {
+        width: calc(100% - 25px);
+    }
+
+    .list-ticket-item .list-ticket-edit {
+        position: relative;
+        right: calc(17px - 100%);
+        display: inline-block;
+    }
+
+    .list-ticket-item .list-ticket-date,
+    .list-ticket-item .list-ticket-price {
+        font-size: 100%;
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+
+    .list-ticket-line {
+        height: 18px;
+    }
+
+    .list-ticket-icons {
+        width: 32px;
+    }
+
+}

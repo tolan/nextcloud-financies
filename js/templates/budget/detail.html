@@ -1,38 +1,54 @@
-<div class="budget-detail">
-    <div class="budget-lists">
-        <div class="side-panel">
-            <div class="top-panel budget-share" ng-controller="BudgetShareController">
-                <div class="dropdown-group">
-                    <div class="dropdown-button">Sdílení</div>
-                    <div class="dropdown-content">
-                        <input type="text" name="name" ng-model="query" ng-change="find(query)" ng-trim="true" autocomplete="off">
-                        <table>
-                            <tr ng-repeat="user in users | orderBy: 'userId'">
-                                <td>{{user.userId}}</td>
-                                <td>
-                                    <input type="checkbox" ng-model="user.permissions" ng-change="save(user)" ng-true-value="'1'" ng-false-value="'0'">
-                                </td>
-                            </tr>
-                        </table>
+<div class="financies-panel" ng-controller="BudgetListCtrl">
+    <div class="side-panel">
+        <div class="side-panel-wrapper">
+            <div class="budget-list" ng-include="__templateUrl + 'budget/list.html'"></div>
+            <div class="financies-settings" ng-controller="BudgetSettingsCtrl">
+                <div class="financies-settings-content">
+                    <div>
+                        <button class="settings-button" ng-click="isOpen = !isOpen"></button>
+                    </div>
+                    <div ng-show="isOpen" class="settings-content">
+                        <div class="financies-settings-list" ng-include="__templateUrl + 'settings/list.html'"></div>
                     </div>
                 </div>
             </div>
-
-            <div class="side-panel-list" ng-controller="BudgetGridController" dnd-list="lists">
-                <div class="side-panel-list-row side-panel-list-item"
-                    ng-repeat="list in lists"
-                    ng-include="'list_edit.html'"
-                    dnd-draggable="list"
-                    dnd-moved="lists.splice($index, 1); moved()"
-                    dnd-effect-allowed="move"
-                    >
-                </div>
-                <div class="side-panel-list-row side-panel-list-add" ng-include="'list_edit.html'"></div>
-            </div>
         </div>
     </div>
-    <div class="list-tickets" ng-if="listId" ng-controller="ListController" ng-include="__templateUrl + 'list/detail.html'">
+</div>
+
+<div class="budget-lists" ng-if="budgetId">
+    <div class="side-panel">
+        <div class="top-panel budget-share" ng-controller="BudgetShareController">
+            <div class="dropdown-group">
+                <div class="dropdown-button">Sdílení</div>
+                <div class="dropdown-content">
+                    <input type="text" name="name" ng-model="query" ng-change="find(query)" ng-trim="true" autocomplete="off">
+                    <table>
+                        <tr ng-repeat="user in users | orderBy: 'userId'">
+                            <td>{{user.displayname}}</td>
+                            <td>
+                                <input type="checkbox" ng-model="user.permissions" ng-change="save(user)" ng-true-value="'1'" ng-false-value="'0'">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-panel-list" ng-controller="BudgetGridController" dnd-list="lists">
+            <div class="side-panel-list-row side-panel-list-item"
+                ng-repeat="list in lists"
+                ng-include="'list_edit.html'"
+                dnd-draggable="list"
+                dnd-moved="lists.splice($index, 1); moved()"
+                dnd-effect-allowed="move"
+                >
+            </div>
+            <div class="side-panel-list-row side-panel-list-add" ng-include="'list_edit.html'"></div>
+        </div>
     </div>
+</div>
+<div class="list-tickets" ng-if="listId" ng-controller="ListController" ng-include="__templateUrl + 'list/detail.html'">
 </div>
 
 

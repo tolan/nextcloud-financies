@@ -44,7 +44,7 @@
                 <div class="dropdown-content">
                     <div class="pointer list-options-group-content-row" ng-repeat="item in payers" ng-click="select('payers', item)">
                         <span class="pointer icon" ng-class="isSelected('payers', item) ? 'icon-checkmark' : 'icon-close'"></span>
-                        <span class="pointer truncate">{{item.userId}}</span>
+                        <span class="pointer truncate">{{item.displayname}}</span>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                 <div class="dropdown-content">
                     <div class="pointer list-options-group-content-row" ng-repeat="item in consumers" ng-click="select('consumers', item)">
                         <span class="pointer icon" ng-class="isSelected('consumers', item) ? 'icon-checkmark' : 'icon-close'"></span>
-                        <span class="pointer truncate">{{item.userId}}</span>
+                        <span class="pointer truncate">{{item.displayname}}</span>
                     </div>
                 </div>
             </div>

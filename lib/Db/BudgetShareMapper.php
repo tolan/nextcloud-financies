@@ -20,18 +20,22 @@ class BudgetShareMapper extends Mapper {
         $userTable  = '*PREFIX*users';
         $groupTable = '*PREFIX*group_user';
 
-        $sql = 'SELECT DISTINCT u.uid '
+        $sql = 'SELECT DISTINCT u.uid, u.displayname '
             . 'FROM '.$userTable.' as u '
             . 'INNER JOIN '.$groupTable.' as gu ON gu.uid = u.uid '
             . 'INNER JOIN '.$groupTable.' as gu2 ON gu.gid = gu2.gid '
-            . 'WHERE u.uid like ? AND gu2.uid = ?';
+            . 'WHERE (LOWER(u.uid) like ? OR LOWER(u.displayname) like ?) AND gu2.uid = ? ';
 
-        $stmt = $this->execute($sql, ['%'.$query.'%', $userId]);
+        $stmt = $this->execute($sql, ['%'.strtolower($query).'%', '%'.strtolower($query).'%', $userId]);
         return $stmt->fetchAll();
     }
 
     public function find($budgetId) {
-        $sql = 'SELECT * FROM '.$this->tableName.' WHERE budget_id = ?';
+        $userTable = '*PREFIX*users';
+
+        $sql = 'SELECT fs.*, u.displayname FROM '.$this->tableName.' as fs '
+            . 'INNER JOIN '.$userTable.' as u ON fs.user_id = u.uid '
+            . 'WHERE budget_id = ?';
 
         return $this->findEntities($sql, [$budgetId]);
     }

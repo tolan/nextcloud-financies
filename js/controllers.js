@@ -16,7 +16,11 @@ angular.module('Financies')
             BudgetShareService.getShares(
                 route.params.budgetId,
                 function (response) {
-                    $scope.container.set('shares', response.data);
+                    var users = response.data.map(function(user, ) {
+                        return Object.assign({}, user, {displayname: user.displayname || user.uid});
+                    })
+
+                    $scope.container.set('shares', users);
                 }
             );
         }
@@ -187,7 +191,8 @@ angular.module('Financies')
                                 share = {
                                     budgetId: $scope.budgetId,
                                     userId: user.uid,
-                                    permissions: 0
+                                    permissions: 0,
+                                    displayname: user.displayname || user.uid
                                 };
                             }
 
@@ -341,7 +346,7 @@ angular.module('Financies')
         payers:    [],
         consumers: [],
         grouping:  [],
-        sorting:   [$scope.sortingOptions[0]]
+        sorting:   [$scope.sortingOptions[1]]
     };
 
     $scope.container.get('groups', function (groups) {
@@ -509,15 +514,18 @@ angular.module('Financies')
     };
 
     $scope.getNames = function (items, field) {
+        var fields = [].concat(field);
         items = items || [];
         items = items.map(function (item) {
-            return item[field];
+            return fields.reduce(function(acc, field) {
+                return acc === '' && item[field] ? item[field] : acc;
+            }, '');
         });
 
         return items.join(', ');
     };
 
-    var transformPricee = function (price) {
+    var transformPrice = function (price) {
         var match, id, ticket;
         if ((match = price.match(/\{id:\d+\}/g))) {
             match.forEach(function (hash) {
@@ -528,7 +536,7 @@ angular.module('Financies')
                 });
 
                 if (ticket) {
-                    price = price.replace(hash, transformPricee(ticket.price));
+                    price = price.replace(hash, '(' + transformPrice(ticket.price) + ')');
                 }
             });
         }
@@ -574,11 +582,16 @@ angular.module('Financies')
     };
 
     $scope.calculate = function (price) {
-        var result = transformPricee(price.toString());
-        if (!/^[\d +-\/\*]+$/.test(result.toString())) {
+        var result = transformPrice(price.toString());
+
+        if (!/^[\d +-\/\*\(\)]+$/.test(result.toString())) {
             result = 'ERROR!';
         } else {
-            result = eval(result);
+            try {
+                result = eval(result);
+            } catch (e) {
+                result = 'ERROR!';
+            }
         }
 
         return result;
@@ -707,6 +720,8 @@ angular.module('Financies')
                     var index = $scope.tickets.findIndex(function (item) { return item.id === ticket.id; });
                     $scope.tickets[index] = response.data;
                 }
+
+                groupTickets();
             }
         );
     };
@@ -715,13 +730,10 @@ angular.module('Financies')
         BudgetTicketService.delete(
             ticket,
             function (response) {
-                $scope.tickets = $scope.tickets.reduce(function (acc, item) {
-                    if (item.id !== response.data.id) {
-                        acc.push(item);
-                    }
-
-                    return acc;
-                }, []);
+                $scope.tickets = $scope.tickets.filter(function (item) {
+                    return item.id !== response.data.id;
+                });
+                groupTickets();
             }
         );
     };
@@ -730,20 +742,24 @@ angular.module('Financies')
 .controller('ListNotesController', function ($scope, $routeParams, $timeout, BudgetNotesService) {
     $scope.listId   = $routeParams.listId;
     $scope.timer;
+    $scope.loaded = false;
     $scope.notes = {
         listId: $scope.listId,
         text: ''
     };
 
     var save = function () {
-        BudgetNotesService.save($scope.notes, function(response) {
-            $scope.notes = response.data;
-        });
+        if ($scope.loaded) {
+            BudgetNotesService.save($scope.notes, function(response) {
+                $scope.notes = response.data;
+            });
+        }
     };
 
     BudgetNotesService.getNotes(
         $scope.listId,
         function (response) {
+            $scope.loaded = true;
             var notes = _.first(response.data);
             if (notes) {
                 $scope.notes = notes;
@@ -817,7 +833,7 @@ angular.module('Financies')
     };
 
     $scope.sharesPickerItemTemplate = function () {
-        return '<div>{{item.userId}}</div>';
+        return '<div>{{item.displayname}}</div>';
     };
 })
 

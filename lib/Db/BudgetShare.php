@@ -15,13 +15,15 @@ class BudgetShare extends Entity implements JsonSerializable {
     protected $budgetId;
     protected $userId;
     protected $permissions;
+    protected $displayname;
 
     public function jsonSerialize() {
         return [
             'id'          => $this->id,
             'budgetId'    => $this->budgetId,
             'userId'      => $this->userId,
-            'permissions' => $this->permissions
+            'permissions' => $this->permissions,
+            'displayname' => $this->displayname,
         ];
     }
 }
