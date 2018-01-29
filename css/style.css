@@ -266,25 +266,6 @@
     width: 30px;
 }
 
-/*.budget-detail .budget-grid .dndPlaceholder {
-    vertical-align: top;
-    margin: 3px;
-    padding: 2px;
-    border: 1px solid #B8B8B8;
-    border-radius: 7px;
-    display: inline-block;
-    width: 120px;
-    height: 90px;
-}
-
-.budget-detail .budget-grid .dndPlaceholder {
-    background-color: #D0D0D0;
-}
-
-.budget-detail .budget-grid .dndDraggingSource {
-    opacity: 0.2;
-}*/
-
 .list-ticket-set-wrapper,
 .list-ticket-set-content {
     display: table;
@@ -386,15 +367,43 @@
     width: calc(100% - 40px);
 }
 
-.ticket-calculate td {
-    width: 180px;
-    padding: 5px 15px 5px 15px;
+.ticket-calculate-dialog {
+    width: 100%;
+    padding-top: 30px;
+    margin-right: 25px
 }
 
-.ticket-calculate-head th {
+.ticket-calculate {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.ticket-calculate-head > div,
+.ticket-calculate-row > div,
+.ticket-calculate-sum > div {
+    width: 180px;
+    padding: 5px 15px 5px 15px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ticket-calculate-head {
+    position: fixed;
+    margin-top: -30px;
+    height: 30px;
+    background-color: #F4F4F4;
+}
+
+.ticket-calculate-head > div {
     border-bottom: 1px solid #B0B0B0;
     font-size: 120%;
     text-align: center;
+    height: 100%;
+}
+
+.ticket-calculate-row {
+    height: 35px;
 }
 
 .ticket-calculate-row:hover {
@@ -403,27 +412,34 @@
 
 .ticket-calculate-row .ticket-calculate-date {
     display: inline-block;
-    width: 100px;
+    width: 55%;
+    height: 100%;
 }
 
 .ticket-calculate-row .ticket-calculate-price {
     display: inline-block;
+    width: 40%;
+    height: 100%;
 }
 
-.ticket-calculate-row td {
+.ticket-calculate-row > div {
     border-right: 1px solid #B0B0B0;
+    height: 100%;
+    white-space: nowrap;
 }
 
-.ticket-calculate-row td:last-child {
+.ticket-calculate-row > div:last-child {
     border-right: none;
 }
 
 .ticket-calculate-item span {
     display: inline-block;
-    width: 50%;
+    height: 100%;
+    width: 45%;
     text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    vertical-align: middle;
 }
 
 .ticket-calculate-plus {
@@ -434,7 +450,7 @@
     color: #CC0000;
 }
 
-.ticket-calculate-sum td {
+.ticket-calculate-sum > div {
     border-top: 1px solid #B0B0B0;
     font-size: 120%;
     text-align: center;

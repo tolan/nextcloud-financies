@@ -775,7 +775,13 @@ angular.module('Financies')
         $scope.timer = $timeout(save, 800);
     };
 
-    $scope.container.get('exit', save);
+    $scope.container.get('exit', function () {
+        if ($scope.timer) {
+            $timeout.cancel($scope.timer);
+        }
+
+        save();
+    });
 })
 
 .controller('TicketController', function ($scope, $routeParams) {

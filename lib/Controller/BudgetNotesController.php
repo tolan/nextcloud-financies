@@ -70,7 +70,7 @@ class BudgetNotesController extends Controller {
         $notes->setText($text);
 
         return new DataResponse($this->_mapper->insert($notes));
-    }
+        }
 
     /**
      * @NoAdminRequired
@@ -79,9 +79,9 @@ class BudgetNotesController extends Controller {
      * @param int    $listId
      * @param string $text
      */
-    public function update($id, $listId, $text) {
+    public function update($listId, $text) {
         try {
-            $notes = $this->_mapper->get($id, $this->_userId);
+            $notes = $this->_mapper->get($listId, $this->_userId);
         } catch(Exception $e) {
             return new DataResponse([], Http::STATUS_NOT_FOUND);
         }

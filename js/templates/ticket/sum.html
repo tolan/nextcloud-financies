@@ -1,28 +1,27 @@
 <div class="dialog-wrapper">
     <div class="dialog">
-        <div class="dialog-content ticket-dialog">
-            <table class="ticket-calculate">
-                <tr class="ticket-calculate-head">
-                    <th></th>
-                    <th ng-repeat="share in shares">{{share.displayname}}</th>
-                </tr>
-                <tr class="ticket-calculate-row" ng-repeat="ticket in tickets">
-                    <td>
-                        <span class="ticket-calculate-date truncate">{{ticket.date}}</span>
-                        <span class="ticket-calculate-price">{{getPrice(ticket.price)}}</span>
-                    </td>
-                    <td class="ticket-calculate-item" ng-repeat="share in shares" ng-init="value=calculateFor(ticket, share)">
+        <div class="dialog-content ticket-dialog ticket-calculate-dialog">
+            <div class="ticket-calculate">
+                <div class="ticket-calculate-head">
+                    <div>Datum a částka</div><div ng-repeat="share in shares">{{share.displayname}}</div>
+                </div>
+                <div class="ticket-calculate-row" ng-repeat="ticket in tickets" title="{{getNames(ticket.groups, 'name')+(ticket.notes ? ': '+ticket.notes : '')}}">
+                    <div>
+                        <div class="ticket-calculate-date">{{ticket.date}}</div>
+                        <div class="ticket-calculate-price">{{getPrice(ticket.price)}}</div>
+                    </div>
+                    <div class="ticket-calculate-item" ng-repeat="share in shares" ng-init="value=calculateFor(ticket, share)">
                         <span class="ticket-calculate-plus">{{value.plus}}</span>
                         <span class="ticket-calculate-minus">{{value.minus}}</span>
-                    </td>
-                </tr>
-                <tr class="ticket-calculate-sum">
-                    <td></td>
-                    <td class="ticket-calculate-sum-item" ng-repeat="share in shares" ng-init="value=calculateSum(share)">
+                    </div>
+                </div>
+                <div class="ticket-calculate-sum">
+                    <div>Součet</div>
+                    <div class="ticket-calculate-sum-item" ng-repeat="share in shares" ng-init="value=calculateSum(share)">
                         <span ng-class="value[0] === '-' ? 'ticket-calculate-minus' : 'ticket-calculate-plus'">{{value}}</span>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

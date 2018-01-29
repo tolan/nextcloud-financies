@@ -1,30 +1,3 @@
-@media only screen and (max-width: 750px) {
-    .financies-panel,
-    .budget-lists {
-        width: 50%;
-        margin-right: -3px;
-    }
-
-    .list-tickets {
-        width: 100%;
-    }
-
-    .ticket-dialog-edit {
-        width: 90vw;
-    }
-
-    .ticket-section-inputs,
-    .ticket-section-notes,
-    .ticket-section-buttons {
-        width: 90%;
-    }
-    .ticket-section-date {
-        width: 80%;
-        padding-left: 10%;
-        margin-bottom: 10px;
-    }
-}
-
 @media only screen and (max-width: 400px) {
     .dialog {
         max-height: 90vh;
@@ -55,13 +28,50 @@
         display: none;
     }
 
-    .ticket-calculate td {
-        width: 120px;
-        padding: 0;
+    .ticket-calculate-dialog {
+        padding-top: 50px;
     }
 
-    .ticket-calculate-row .ticket-calculate-date {
-        width: 50px;
+    .ticket-calculate-head {
+        margin-top: -50px;
+    }
+
+    .ticket-calculate-head,
+    .ticket-calculate-row {
+        white-space: nowrap;
+        height: 50px;
+    }
+
+    .ticket-calculate-head > div,
+    .ticket-calculate-row > div,
+    .ticket-calculate-sum > div {
+        width: 100px;
+        height: 100%;
+        padding: 0;
+        vertical-align: middle;
+    }
+
+    .ticket-calculate-head > div {
+        white-space: normal;
+        padding-top: 10px;
+    }
+
+    .ticket-calculate-row > div > span {
+        vertical-align: middle;
+        padding-top: 15px;
+    }
+
+    .ticket-calculate-row .ticket-calculate-date,
+    .ticket-calculate-row .ticket-calculate-price {
+        display: block;
+        height: 50%;
+        width: 100%;
+        padding-right: 8%;
+        padding-left: 8%;
+    }
+
+    .ticket-calculate-price {
+        text-align: right;
     }
 
     .list-ticket-item {
