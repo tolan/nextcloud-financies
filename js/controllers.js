@@ -739,12 +739,12 @@ angular.module('Financies')
                 } else {
                     var index = $scope.tickets.findIndex(function (item) { return item.id === ticket.id; });
                     $scope.tickets[index] = response.data;
-                }
 
-                if (ticket.listId !== $scope.listId) {
-                    $scope.tickets = $scope.tickets.filter(function (item) {
-                        return item.id !== response.data.id;
-                    });
+                    if (ticket.listId !== $scope.listId) {
+                        $scope.tickets = $scope.tickets.filter(function (item) {
+                            return item.id !== response.data.id;
+                        });
+                    }
                 }
 
                 $scope.container.set('tickets', $scope.tickets);
