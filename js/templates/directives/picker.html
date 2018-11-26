@@ -1,6 +1,6 @@
 <div class="search-picker" ng-mouseleave="leaveSearched()">
     <div class="search-picker-input">
-        <input type="text" ng-change="search()" ng-model="string" ng-dblclick="searchAll()" />
+        <input type="text" ng-change="search()" ng-model="string" ng-dblclick="searchAll()" ng-focus="focus()" ng-blur="blur()" />
         <button class="icon-caret-dark" ng-click="searchAll()"></button>
     </div>
     <div class="search-picker-result">

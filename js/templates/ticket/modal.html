@@ -1,6 +1,9 @@
 <div class="dialog-wrapper">
     <div class="dialog">
         <div class="dialog-content ticket-dialog ticket-dialog-edit">
+            <div class="ticket-section-list">
+                <selectbox class="ticket-section-list-select" ng-model="selectedList" options="lists"></selectbox>
+            </div>
             <div class="ticket-section-date">
                 <div class="ticket-date"
                     moment-picker="ticket.date"

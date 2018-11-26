@@ -1,0 +1,11 @@
+<div class="selector-wrapper">
+    <div class="pointer selector-selected" ng-click="toggle()">
+        <div class="pointer selector-value">{{ngModel.name}}</div>
+        <div class="pointer selector-icon">
+            <div class="icon-caret-dark"></div>
+        </div>
+    </div>
+    <div class="selector-list" ng-show="isOpen">
+        <div class="pointer selector-list-item" ng-repeat="item in options" ng-click="select(item)">{{item.name}}</div>
+    </div>
+</div>

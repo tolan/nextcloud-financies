@@ -1,6 +1,7 @@
 <div class="side-panel-list" dnd-list="budgets">
     <div class="side-panel-list-row side-panel-list-item"
         ng-repeat="budget in budgets"
+        ng-class="(budget.id === activeBudget) ? 'side-panel-list-item-active' : ''"
         ng-include="'budget_edit.html'"
         dnd-draggable="budget"
         dnd-moved="budgets.splice($index, 1); movedBudgets()"

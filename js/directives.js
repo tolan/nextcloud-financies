@@ -1,6 +1,6 @@
 /* global _ */
 angular.module('Financies')
-.directive('picker', ['$compile', '$timeout', function ($compile, $timeout) {
+.directive('picker', ['$window', '$compile', '$timeout', function ($window, $compile, $timeout) {
     return {
         restrict: 'EA',
         require: '?^ngModel',
@@ -37,7 +37,7 @@ angular.module('Financies')
 
             scope.isSelected = function (item) {
                 return _.find(scope.selected, clone(item));
-            }
+            };
 
             scope.selectAllItems = function(searched) {
                 searched.forEach(function(item) {
@@ -104,9 +104,45 @@ angular.module('Financies')
                 el.html(scope.template);
                 $compile(el)(clonedScope);
             };
+
+            function onResize(){
+                angular.element(element.find('input'))[0].scrollIntoView();
+            };
+
+            scope.focus = function() {
+                angular.element($window).on('resize', onResize);
+            };
+
+            scope.blur = function() {
+                angular.element($window).off('resize', onResize);
+            };
         }
     };
 }])
+.directive('selectbox', function() {
+    return {
+        restrict: 'EA',
+        require: '?^ngModel',
+        replace: true,
+        scope: {
+            ngModel : "=",
+            options : "="
+        },
+        templateUrl: templateUrl + 'directives/selectbox.html',
+        link: function(scope) {
+            scope.isOpen = false;
+
+            scope.toggle = function() {
+                scope.isOpen = !scope.isOpen;
+            };
+
+            scope.select = function(item) {
+                scope.ngModel = item;
+                scope.toggle();
+            };
+        }
+    };
+})
 .directive('autoFocus', function($timeout) {
     return {
         restrict: 'AC',

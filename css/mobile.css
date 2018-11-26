@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 480px) {
     .dialog {
         max-height: 90vh;
         top: -45vh;
@@ -26,6 +26,21 @@
     .budget-share,
     .budget-list-detail > .top-panel {
         display: none;
+    }
+
+    .ticket-dialog-edit {
+        width: 85vw;
+    }
+
+    .ticket-section-inputs,
+    .ticket-section-notes,
+    .ticket-section-buttons {
+        width: 90%;
+    }
+    .ticket-section-date {
+        width: 90%;
+        padding-left: 10%;
+        margin-bottom: 10px;
     }
 
     .ticket-calculate-dialog {
@@ -72,6 +87,31 @@
 
     .ticket-calculate-price {
         text-align: right;
+    }
+
+    .list-tickets {
+        width: 100%;
+        min-width: 320px;
+        display: inline-block;
+    }
+
+    .budget-tickets-list {
+        width: calc(100% - 55px);
+    }
+
+    .list-ticket-set {
+        padding: 0;
+    }
+
+    .budget-tickets-side {
+        width: 50px;
+    }
+
+    .budget-tickets-button-calculate button,
+    .budget-tickets-button-add button {
+        width: 100%;
+        font-size: 40px;
+        margin: 0;
     }
 
     .list-ticket-item {

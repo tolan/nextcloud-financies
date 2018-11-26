@@ -38,6 +38,7 @@
         <div class="side-panel-list" ng-controller="BudgetGridController" dnd-list="lists">
             <div class="side-panel-list-row side-panel-list-item"
                 ng-repeat="list in lists"
+                ng-class="(list.id === activeList) ? 'side-panel-list-item-active' : ''"
                 ng-include="'list_edit.html'"
                 dnd-draggable="list"
                 dnd-moved="lists.splice($index, 1); moved()"

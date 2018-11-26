@@ -3,7 +3,7 @@
 
 angular.module('Financies')
 
-.controller('MainCtrl', function ($scope, $route, BudgetShareService, BudgetGroupsService) {
+.controller('MainCtrl', function ($scope, $route, BudgetShareService, BudgetGroupsService, BudgetListService, BudgetTicketService) {
     $scope.route = $route;
     BudgetGroupsService.getGroups(
         function (response) {
@@ -16,19 +16,36 @@ angular.module('Financies')
             BudgetShareService.getShares(
                 route.params.budgetId,
                 function (response) {
-                    var users = response.data.map(function(user, ) {
+                    var users = response.data.map(function(user) {
                         return Object.assign({}, user, {displayname: user.displayname || user.uid});
-                    })
+                    });
 
                     $scope.container.set('shares', users);
                 }
             );
+
+            BudgetListService.getLists(
+                route.params.budgetId,
+                function (response) {
+                    $scope.container.set('lists', response.data);
+                }
+            );
+
+            if (route.params.listId) {
+                BudgetTicketService.getTickets(
+                    route.params.listId,
+                    function (response) {
+                        $scope.container.set('tickets', response.data);
+                    }
+                );
+            }
         }
     });
 })
 
-.controller('BudgetListCtrl', function ($scope, BudgetService) {
+.controller('BudgetListCtrl', function ($scope, $routeParams, BudgetService) {
     $scope.budgets      = [];
+    $scope.activeBudget = Number($routeParams.budgetId) || null;
     $scope.budget       = {
         name: ''
     };
@@ -244,18 +261,16 @@ angular.module('Financies')
 
 .controller('BudgetGridController', function ($scope, $routeParams, BudgetListService) {
     $scope.budgetId = $routeParams.budgetId;
+    $scope.activeList = Number($routeParams.listId) || null;
     $scope.lists    = [];
     $scope.list     = {
         'name'     : '',
         'budgetId' : $scope.budgetId
     };
 
-    BudgetListService.getLists(
-        $scope.budgetId,
-        function (response) {
-            $scope.lists = response.data;
-        }
-    );
+    $scope.container.get('lists', function (lists) {
+        $scope.lists = lists;
+    });
 
     $scope.openEdit = function (list) {
         list._action = 'edit';
@@ -285,6 +300,8 @@ angular.module('Financies')
                 if (!list.id) {
                     $scope.lists.push(response.data);
                 }
+
+                $scope.container.set('lists', $scope.lists);
             }
         );
 
@@ -300,6 +317,8 @@ angular.module('Financies')
                         return item.id !== response.data.id;
                     }
                 );
+
+                $scope.container.set('lists', $scope.lists);
             }
         );
     };
@@ -310,6 +329,7 @@ angular.module('Financies')
             return item;
         });
         BudgetListService.saveOrder($scope.lists);
+        $scope.container.set('lists', $scope.lists);
     };
 })
 
@@ -491,13 +511,10 @@ angular.module('Financies')
         groupTickets();
     });
 
-    BudgetTicketService.getTickets(
-        $scope.listId,
-        function (response) {
-            $scope.tickets = response.data;
-            groupTickets();
-        }
-    );
+    $scope.container.get('tickets', function (tickets) {
+        $scope.tickets = tickets;
+        groupTickets();
+    });
 
     $scope.filter = function (items) {
         if ($scope.options) {
@@ -549,14 +566,17 @@ angular.module('Financies')
         if (sorting.field === 'date') {
             first  = first.split('.').map(function(value) { return parseInt(value);}).reverse();
             second = second.split('.').map(function(value) { return parseInt(value);}).reverse();
-
             return first.reduce(function (result, value, index) {
-                if (result === 1 && value > second[index]) {
-                    result = -1;
+                if (result === 0) {
+                    if (value > second[index]) {
+                        result = -1;
+                    } else if (value < second[index]) {
+                        result = 1;
+                    }
                 }
 
                 return result;
-            }, 1);
+            }, 0);
         } else if (sorting.field === 'price') {
             return $scope.calculate(first.toString()) < $scope.calculate(second.toString()) ? 1 : -1;
         }
@@ -721,6 +741,13 @@ angular.module('Financies')
                     $scope.tickets[index] = response.data;
                 }
 
+                if (ticket.listId !== $scope.listId) {
+                    $scope.tickets = $scope.tickets.filter(function (item) {
+                        return item.id !== response.data.id;
+                    });
+                }
+
+                $scope.container.set('tickets', $scope.tickets);
                 groupTickets();
             }
         );
@@ -733,6 +760,7 @@ angular.module('Financies')
                 $scope.tickets = $scope.tickets.filter(function (item) {
                     return item.id !== response.data.id;
                 });
+                $scope.container.set('tickets', $scope.tickets);
                 groupTickets();
             }
         );
@@ -787,9 +815,11 @@ angular.module('Financies')
 .controller('TicketController', function ($scope, $routeParams) {
     var date = new Date();
     $scope.groups = [];
+    $scope.lists = [];
     $scope.shares = [];
+    $scope.selectedList = null;
     $scope.ticket = Object.assign({
-        listId: $routeParams.listId,
+        listId: Number($routeParams.listId),
         date: date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear(),
         price: '',
         groups: [],
@@ -806,6 +836,11 @@ angular.module('Financies')
         $scope.shares = shares;
     });
 
+    $scope.container.get('lists', function (lists) {
+        $scope.selectedList = _.find(lists, {id: $scope.ticket.listId});
+        $scope.lists = lists;
+    });
+
     $scope.close = function () {
         $scope.$emit('TicketController:close');
     };
@@ -815,6 +850,10 @@ angular.module('Financies')
     };
 
     $scope.save = function () {
+        if ($scope.selectedList) {
+            $scope.ticket.listId = $scope.selectedList.id;
+        }
+
         $scope.$emit('TicketController:save', $scope.ticket);
     };
 
@@ -886,5 +925,3 @@ angular.module('Financies')
         }, 0)));
     };
 })
-;
-

@@ -23,7 +23,7 @@ class BudgetTicket extends Entity implements JsonSerializable {
     public function jsonSerialize() {
         return [
             'id'        => $this->id,
-            'listId'    => $this->listId,
+            'listId'    => (int)$this->listId,
             'date'      => $this->date,
             'price'     => $this->price,
             'groups'    => json_decode($this->groups, true),
