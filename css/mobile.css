@@ -1,11 +1,11 @@
 @media only screen and (max-width: 480px) {
     .dialog {
         max-height: 90vh;
-        top: -45vh;
+        top: -35vh;
     }
 
     .dialog-content {
-        max-height: 85vh;
+        max-height: 70vh;
         height: 100%;
     }
 
@@ -38,8 +38,8 @@
         width: 90%;
     }
     .ticket-section-date {
-        width: 90%;
-        padding-left: 10%;
+        width: 93%;
+        padding-left: 0%;
         margin-bottom: 10px;
     }
 
