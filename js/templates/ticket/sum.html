@@ -16,8 +16,15 @@
                     </div>
                 </div>
                 <div class="ticket-calculate-sum">
-                    <div>Součet</div>
+                    <div>Součty</div>
                     <div class="ticket-calculate-sum-item" ng-repeat="share in shares" ng-init="value=calculateSum(share)">
+                        <span class="ticket-calculate-price">{{calculateSumFor(share, 'payers')}}</span>
+                        <span class="ticket-calculate-price">{{calculateSumFor(share, 'consumers')}}</span>
+                    </div>
+                </div>
+                <div class="ticket-calculate-compare">
+                    <div>Rozdíl</div>
+                    <div class="ticket-calculate-compare-item" ng-repeat="share in shares" ng-init="value=calculateCompare(share)">
                         <span ng-class="value[0] === '-' ? 'ticket-calculate-minus' : 'ticket-calculate-plus'">{{value}}</span>
                     </div>
                 </div>

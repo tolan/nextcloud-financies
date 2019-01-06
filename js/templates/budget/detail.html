@@ -38,24 +38,24 @@
         <div class="side-panel-list" ng-controller="BudgetGridController" dnd-list="lists">
             <div class="side-panel-list-row side-panel-list-item"
                 ng-repeat="list in lists"
-                ng-class="(list.id === activeList) ? 'side-panel-list-item-active' : ''"
+                ng-class="(list.id === activeList) ? 'side-panel-list-item-active list-item-active' : ''"
                 ng-include="'list_edit.html'"
                 dnd-draggable="list"
                 dnd-moved="lists.splice($index, 1); moved()"
                 dnd-effect-allowed="move"
                 >
             </div>
-            <div class="side-panel-list-row side-panel-list-add" ng-include="'list_edit.html'"></div>
+            <div class="side-panel-list-row side-panel-list-add list-item-add" ng-include="'list_edit.html'"></div>
         </div>
     </div>
 </div>
-<div class="list-tickets" ng-if="listId" ng-controller="ListController" ng-include="__templateUrl + 'list/detail.html'">
+<div class="list-detail" ng-if="listId" ng-controller="ListController" ng-include="__templateUrl + 'list/detail.html'">
 </div>
 
 
 <script type="text/ng-template" id="list_edit.html">
     <span ng-if="list._action === 'edit'">
-        <input type="text" name="name" ng-model="list.name"auto-focus>
+        <input type="text" name="name" ng-model="list.name" auto-focus ng-keyup="keyup($event, list)">
         <div class="pointer side-panel-list-icon icon-checkmark" ng-click="save(list)"></div>
         <div class="pointer side-panel-list-icon icon-close" ng-click="close(list)"></div>
     </span>

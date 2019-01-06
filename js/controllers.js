@@ -43,7 +43,7 @@ angular.module('Financies')
     });
 })
 
-.controller('BudgetListCtrl', function ($scope, $routeParams, BudgetService) {
+.controller('BudgetListCtrl', function ($scope, $routeParams, $timeout, BudgetService) {
     $scope.budgets      = [];
     $scope.activeBudget = Number($routeParams.budgetId) || null;
     $scope.budget       = {
@@ -53,23 +53,33 @@ angular.module('Financies')
     BudgetService.getBudgets(
         function (response) {
             $scope.budgets = response.data;
+
+            $timeout(function() {
+                var className = $scope.activeBudget ? '.budget-item-active' : '.budget-item-add'
+                var element = document.querySelectorAll(className)[0];
+                element.scrollIntoView();
+            }, 0);
         }
     );
 
     $scope.openEdit = function (budget) {
-        budget._action = 'edit';
+        budget._action       = 'edit';
+        budget._originalName = budget.name;
     };
 
     $scope.openDelete = function (budget) {
-        budget._action = 'delete';
+        budget._action       = 'delete';
+        budget._originalName = budget.name;
     };
 
     $scope.close = function (budget) {
-        delete(budget._action);
-
         if (!budget.id) {
             budget.name = '';
+        } else {
+            budget.name = budget._originalName;
         }
+        delete(budget._action);
+        delete(budget._originalName);
     };
 
     $scope.save = function (budget) {
@@ -89,6 +99,7 @@ angular.module('Financies')
             );
         }
 
+        budget._originalName = budget.name;
         $scope.close(budget);
     };
 
@@ -103,6 +114,15 @@ angular.module('Financies')
                 );
             }
         );
+    };
+
+    $scope.keyup = function (event, budget) {
+        var keyCode = event.keyCode;
+        if (keyCode === 13) {
+            $scope.save(budget);
+        } else if (keyCode === 27) {
+            $scope.close(budget);
+        }
     };
 
     $scope.movedBudgets = function () {
@@ -259,7 +279,7 @@ angular.module('Financies')
     };
 })
 
-.controller('BudgetGridController', function ($scope, $routeParams, BudgetListService) {
+.controller('BudgetGridController', function ($scope, $routeParams, $timeout, BudgetListService) {
     $scope.budgetId = $routeParams.budgetId;
     $scope.activeList = Number($routeParams.listId) || null;
     $scope.lists    = [];
@@ -270,22 +290,34 @@ angular.module('Financies')
 
     $scope.container.get('lists', function (lists) {
         $scope.lists = lists;
+        $timeout(function() {
+            var className = $scope.activeList ? '.list-item-active' : '.list-item-add'
+            var element = document.querySelectorAll(className)[0];
+            if (element) {
+                element.scrollIntoView();
+            }
+        }, 0);
     });
 
     $scope.openEdit = function (list) {
-        list._action = 'edit';
+        list._action       = 'edit';
+        list._originalName = list.name;
     };
 
     $scope.openDelete = function (list) {
-        list._action = 'delete';
+        list._action       = 'delete';
+        list._originalName = list.name;
     };
 
     $scope.close = function (list) {
-        delete(list._action);
-
         if (!list.id) {
             list.name = '';
+        } else {
+            list.name = list._originalName;
         }
+
+        delete(list._action);
+        delete(list._originalName);
     };
 
     $scope.save = function (list) {
@@ -305,6 +337,7 @@ angular.module('Financies')
             }
         );
 
+        list._originalName = list.name;
         $scope.close(list);
     };
 
@@ -321,6 +354,15 @@ angular.module('Financies')
                 $scope.container.set('lists', $scope.lists);
             }
         );
+    };
+
+    $scope.keyup = function (event, list) {
+        var keyCode = event.keyCode;
+        if (keyCode === 13) {
+            $scope.save(list);
+        } else if (keyCode === 27) {
+            $scope.close(list);
+        }
     };
 
     $scope.moved = function () {
@@ -909,7 +951,19 @@ angular.module('Financies')
         return result;
     };
 
-    $scope.calculateSum = function (user) {
+    $scope.calculateSumFor = function (user, side) {
+        return $scope.getPrice(Math.floor($scope.tickets.reduce(function (result, ticket) {
+            var price = $scope.calculate(ticket.price);
+
+            if (ticket[side].find(function (item) { return item.id === user.id; })) {
+                result += price / ticket[side].length;
+            }
+
+            return result;
+        }, 0)));
+    };
+
+    $scope.calculateCompare = function (user) {
         return $scope.getPrice(Math.floor($scope.tickets.reduce(function (result, ticket) {
             var price = $scope.calculate(ticket.price);
 
@@ -924,4 +978,4 @@ angular.module('Financies')
             return result;
         }, 0)));
     };
-})
+});

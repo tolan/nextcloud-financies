@@ -18,12 +18,13 @@
 .budget-lists {
     width: 200px;
     margin-right: -3px;
+    position: fixed;
 }
 
 .financies-settings {
-    position: absolute;
+    position: fixed;
     bottom: 0px;
-    width: calc(100%);
+    width: 199px;
     transition: width 0.2s;
 }
 
@@ -40,14 +41,24 @@
     width: 100%;
 }
 
+.budget-lists {
+    left: 200px;
+}
+
 .budget-lists,
-.list-tickets {
+.list-detail {
     height: 100%;
     display: inline-block;
     vertical-align: top;
 }
 
-.list-tickets {
+.financies-panel .side-panel-list,
+.budget-lists .side-panel-list {
+    height: calc(100% - 90px);
+}
+
+.list-detail {
+    margin-left: 400px;
     width: calc(100% - 401px);
     min-width: 320px;
     display: inline-block;
@@ -76,6 +87,10 @@
 .list-options-group-content .icon {
     display: inline-block;
     width: 16px;
+}
+
+.top-panel .list-options-group:last-of-type .dropdown-group:last-of-type .dropdown-content {
+    margin-left: -50px;
 }
 
 .list-options-group-content-row {
@@ -220,8 +235,8 @@
 }
 
 .budget-tickets-button-add {
-    position: relative;
-    top: calc(100% - 140px);
+    position: absolute;
+    bottom: calc(20vh + 20px);
 }
 
 .budget-tickets-button-calculate button,
@@ -244,7 +259,7 @@
 }
 
 .budget-list-detail .list-notes {
-    height: 20%;
+    height: 20vh;
     min-width: 100%;
 }
 
@@ -396,7 +411,8 @@
 
 .ticket-calculate-head > div,
 .ticket-calculate-row > div,
-.ticket-calculate-sum > div {
+.ticket-calculate-sum > div,
+.ticket-calculate-compare > div {
     width: 180px;
     padding: 5px 15px 5px 15px;
     display: inline-block;
@@ -419,6 +435,7 @@
 
 .ticket-calculate-row {
     height: 35px;
+    white-space: nowrap;
 }
 
 .ticket-calculate-row:hover {
@@ -447,6 +464,7 @@
     border-right: none;
 }
 
+.ticket-calculate-sum-item span,
 .ticket-calculate-item span {
     display: inline-block;
     height: 100%;
@@ -467,6 +485,10 @@
 
 .ticket-calculate-sum > div {
     border-top: 1px solid #B0B0B0;
+    text-align: center;
+}
+
+.ticket-calculate-compare > div {
     font-size: 120%;
     text-align: center;
 }

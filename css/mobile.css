@@ -15,16 +15,30 @@
 
     .financies-panel,
     .budget-lists {
+        position: relative;
+        left: 0px;
         width: 100%;
         margin-right: -3px;
         height: 100%;
         max-height: 200px;
         border-bottom: 1px solid #B0B0B0;
+        overflow-y: auto;
+    }
+
+    .budget-lists .side-panel-list {
+        height: 100%;
+    }
+
+    .list-detail {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
     }
 
     .financies-settings,
     .budget-share,
-    .budget-list-detail > .top-panel {
+    .budget-list-detail > .top-panel,
+    .list-notes {
         display: none;
     }
 
@@ -59,7 +73,8 @@
 
     .ticket-calculate-head > div,
     .ticket-calculate-row > div,
-    .ticket-calculate-sum > div {
+    .ticket-calculate-sum > div,
+    .ticket-calculate-compare > div {
         width: 100px;
         height: 100%;
         padding: 0;
@@ -91,7 +106,7 @@
 
     .list-tickets {
         width: 100%;
-        min-width: 320px;
+        min-width: 300px;
         display: inline-block;
     }
 
@@ -105,6 +120,11 @@
 
     .budget-tickets-side {
         width: 50px;
+    }
+
+    .budget-tickets-button-add {
+        position: absolute;
+        bottom: 10px;
     }
 
     .budget-tickets-button-calculate button,

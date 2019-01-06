@@ -66,7 +66,7 @@ angular.module('Financies')
     };
 
     this.delete = function(list, success, error) {
-        return $http.delete(this._getUrl('lists' + list.id)).then(success, error);
+        return $http.delete(this._getUrl('lists/' + list.id)).then(success, error);
     };
 
     this.saveOrder = function(lists, success, error) {
