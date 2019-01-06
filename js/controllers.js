@@ -57,7 +57,9 @@ angular.module('Financies')
             $timeout(function() {
                 var className = $scope.activeBudget ? '.budget-item-active' : '.budget-item-add'
                 var element = document.querySelectorAll(className)[0];
-                element.scrollIntoView();
+                if (element) {
+                    element.scrollIntoView();
+                }
             }, 0);
         }
     );
@@ -223,8 +225,8 @@ angular.module('Financies')
                     function (response) {
                         $scope.users = [];
                         response.data.forEach(function (user) {
-                            var share;
-                            if (!(share = $scope.shares.find(function (item) {return item.userId === user.uid;}))) {
+                            var share = $scope.shares.find(function (item) {return item.userId === user.uid;});
+                            if (!share) {
                                 share = {
                                     budgetId: $scope.budgetId,
                                     userId: user.uid,
@@ -245,31 +247,34 @@ angular.module('Financies')
     };
 
     $scope.save = function (share) {
+        share.permissions = (share.permissions === '1') ? '0' : '1';
         if (share.permissions === '0') {
             BudgetShareService.delete(
                 share,
                 function (response) {
-                    $scope.shares = $scope.shares.filter(function (item) {return item.userId !== response.data.userId;});
                     $scope.container.set('shares', $scope.shares);
                 }
             );
         } else {
+            delete(share.id);
             BudgetShareService.save(
                 share,
                 function (response) {
+                    var data = response.data;
                     var index;
-                    response.data.permissions = response.data.permissions.toString();
+                    data.permissions = data.permissions.toString();
+                    data.displayname = share.displayname;
 
-                    if ((index = $scope.shares.findIndex(function (item) {return item.userId === response.data.userId;})) !== -1) {
-                        $scope.shares[index] = response.data;
+                    if ((index = $scope.shares.findIndex(function (item) {return item.userId === data.userId;})) !== -1) {
+                        $scope.shares[index] = data;
                     } else {
-                        $scope.shares.push(response.data);
+                        $scope.shares.push(data);
                     }
 
-                    if ((index = $scope.users.findIndex(function (item) {return item.userId === response.data.userId;})) !== -1) {
-                        $scope.users[index] = response.data;
+                    if ((index = $scope.users.findIndex(function (item) {return item.userId === data.userId;})) !== -1) {
+                        $scope.users[index] = data;
                     } else {
-                        $scope.users.push(response.data);
+                        $scope.users.push(data);
                     }
 
                     $scope.container.set('shares', $scope.shares);
@@ -456,7 +461,7 @@ angular.module('Financies')
 })
 
 .controller('ListTicketsController', function ($scope, $routeParams, BudgetTicketService, ngDialog) {
-    $scope.listId   = $routeParams.listId;
+    $scope.listId   = Number($routeParams.listId);
     $scope.tickets  = [];
     $scope.options  = [];
     $scope.grouped  = [];
@@ -671,6 +676,7 @@ angular.module('Financies')
     $scope.openDialog = function (ticket) {
         ticket = $scope.priceSelector.active ? $scope.priceSelector.ticket : ticket;
         closePriceSelector();
+        var backup = angular.copy(ticket);
 
         var scope = $scope.$new(),
             dialog = ngDialog.open({
@@ -686,6 +692,7 @@ angular.module('Financies')
 
         scope.$on('TicketController:close', function () {
             dialog.close();
+            _.assign(ticket, backup);
         });
 
         scope.$on('TicketController:save', function (event, ticket) {

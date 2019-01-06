@@ -46,7 +46,7 @@ angular.module('Financies')
     };
 
     this.delete = function(share, success, error) {
-        return $http.delete(this._getUrl('share/' + share.id)).then(success, error);
+        return $http.delete(this._getUrl('shares/' + share.id)).then(success, error);
     };
 })
 

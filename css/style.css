@@ -232,11 +232,13 @@
 }
 
 .budget-tickets-button-calculate {
+    position: relative;
+    top: 5px;
 }
 
 .budget-tickets-button-add {
     position: absolute;
-    bottom: calc(20vh + 20px);
+    bottom: 20vh;
 }
 
 .budget-tickets-button-calculate button,

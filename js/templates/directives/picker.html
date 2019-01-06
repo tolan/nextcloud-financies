@@ -12,7 +12,7 @@
             </div>
 
             <div class="pointer search-picker-search-item" ng-repeat="item in searched | limitTo:20" ng-click="select(item, true)">
-                <div class="search-picker-search-item-checkbox" ng-class="isSelected(item) ? 'icon-checkmark' : 'icon-close'"></div>
+                <div class="search-picker-search-item-checkbox" ng-class="findIndex(item) !== -1 ? 'icon-checkmark' : 'icon-close'"></div>
                 <div class="search-picker-search-item-wrapper" ng-init="item">
                     <div ng-init="transformSearchedItem(item, $index, '.search-picker-search-item-wrapper')"></div>
                 </div>

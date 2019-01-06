@@ -23,14 +23,10 @@
                 <div class="dropdown-button">Sdílení</div>
                 <div class="dropdown-content">
                     <input type="text" name="name" ng-model="query" ng-change="find(query)" ng-trim="true" autocomplete="off">
-                    <table>
-                        <tr ng-repeat="user in users | orderBy: 'userId'">
-                            <td>{{user.displayname}}</td>
-                            <td>
-                                <input type="checkbox" ng-model="user.permissions" ng-change="save(user)" ng-true-value="'1'" ng-false-value="'0'">
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="pointer list-options-group-content-row" ng-repeat="user in users | orderBy: 'userId'" ng-click="save(user)">
+                        <span class="pointer icon" ng-class="user.permissions === '1' ? 'icon-checkmark' : 'icon-close'"></span>
+                        <span class="pointer">{{user.displayname}}</span>
+                    </div>
                 </div>
             </div>
         </div>

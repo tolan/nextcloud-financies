@@ -35,13 +35,15 @@ angular.module('Financies')
             scope.searched = [];
             scope.isOpenSearch = false;
 
-            scope.isSelected = function (item) {
-                return _.find(scope.selected, clone(item));
+            scope.findIndex = function (selected) {
+                return _.findIndex(scope.selected, function(item) {
+                    return _.isEqual(clone(item), clone(selected));
+                });
             };
 
             scope.selectAllItems = function(searched) {
                 searched.forEach(function(item) {
-                    if (!scope.isSelected(item)) {
+                    if (scope.findIndex(item) === -1) {
                         scope.selected.push(clone(item));
                     }
                 });
@@ -51,8 +53,9 @@ angular.module('Financies')
             };
 
             scope.select = function (item, showSeach) {
-                var index = scope.isSelected(item);
-                if (!index) {
+                var index = scope.findIndex(item);
+
+                if (index === -1) {
                     scope.selected.push(clone(item));
                 } else {
                     scope.selected.splice(index, 1);
